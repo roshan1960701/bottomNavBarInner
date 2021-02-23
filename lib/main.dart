@@ -1,3 +1,5 @@
+import 'package:bottom_nav/fourth.dart';
+import 'package:bottom_nav/navBar.dart';
 import 'package:bottom_nav/second.dart';
 import 'package:bottom_nav/third.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +55,22 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => App() ));
             },
               child: Text("Android BottomNavBar"),
+            ),
+
+            MaterialButton(
+              color: Colors.deepPurpleAccent,
+              onPressed: ()async{
+                Navigator.push(context, MaterialPageRoute(builder: (context) => fourth() ));
+              },
+              child: Text("Android BottomNavBar 2"),
+            ),
+
+            MaterialButton(
+              color: Colors.deepOrangeAccent,
+              onPressed: ()async{
+                Navigator.push(context, MaterialPageRoute(builder: (context) => navBar() ));
+              },
+              child: Text("Custom Navigator"),
             ),
           ],
         ),

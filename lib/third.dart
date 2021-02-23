@@ -18,62 +18,77 @@ class _thirdState extends State<third> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-      tabBuilder: (BuildContext context, int index) {
-        switch (index) {
-          case 0:
-            return CupertinoTabView(
-              navigatorKey: firstTabNavKey,
-              builder: (BuildContext context) => Screen1(),
-            );
-            break;
-          case 1:
-            return CupertinoTabView(
-              navigatorKey: secondTabNavKey,
-              builder: (BuildContext context) => Screen2(),
-            );
-            break;
-          case 2:
-            return CupertinoTabView(
-              navigatorKey: thirdTabNavKey,
-              builder: (BuildContext context) => Screen3(),
-            );
-            break;
-        }
-        return null;
-      },
-      tabBar: CupertinoTabBar(
-        items: <BottomNavigationBarItem> [
-          BottomNavigationBarItem(
-            title: Text('Tab 1'),
-            icon: Icon(Icons.home)
-          ),
-          BottomNavigationBarItem(
-            title: Text('Tab 2'),
-              icon: Icon(Icons.home)
-          ),
-          BottomNavigationBarItem(
-            title: Text('Tab 3'),
-              icon: Icon(Icons.home)
-          ),
-        ],
-        onTap: (index){
-          // back home only if not switching tab
-          if(currentIndex == index) {
-            switch (index) {
-              case 0:
-                firstTabNavKey.currentState.popUntil((r) => r.isFirst);
-                break;
-              case 1:
-                secondTabNavKey.currentState.popUntil((r) => r.isFirst);
-                break;
-              case 2:
-                thirdTabNavKey.currentState.popUntil((r) => r.isFirst);
-                break;
-            }
+    return WillPopScope(
+      child: CupertinoTabScaffold(
+        tabBuilder: (BuildContext context, int index) {
+          switch (index) {
+            case 0:
+              return CupertinoTabView(
+                navigatorKey: firstTabNavKey,
+                builder: (BuildContext context) => Screen1(),
+              );
+              break;
+            case 1:
+              return CupertinoTabView(
+                navigatorKey: secondTabNavKey,
+                builder: (BuildContext context) => Screen2(),
+              );
+              break;
+            case 2:
+              return CupertinoTabView(
+                navigatorKey: thirdTabNavKey,
+                builder: (BuildContext context) => Screen3(),
+              );
+              break;
           }
-          currentIndex = index;
+          return null;
         },
+        tabBar: CupertinoTabBar(
+          items: <BottomNavigationBarItem> [
+
+            BottomNavigationBarItem(
+              title: Text('Tab 1'),
+              icon: Icon(Icons.home)
+            ),
+
+            BottomNavigationBarItem(
+              title: Text('Tab 2'),
+                icon: Icon(Icons.home)
+            ),
+
+            BottomNavigationBarItem(
+              title: Text('Tab 3'),
+                icon: Icon(Icons.home)
+            ),
+
+
+          ],
+          onTap: (index){
+            // back home only if not switching tab
+            if(currentIndex == index) {
+              switch (index) {
+                case 0:
+                  firstTabNavKey.currentState.popUntil((r) => r.isFirst);
+                  // secondTabNavKey.currentState.popUntil((r) => r.isFirst);
+                  // thirdTabNavKey.currentState.popUntil((r) => r.isFirst);
+                  break;
+                case 1:
+                  secondTabNavKey.currentState.popUntil((r) => r.isFirst);
+                  break;
+                case 2:
+                  thirdTabNavKey.currentState.popUntil((r) => r.isFirst);
+                  break;
+              }
+            }
+            else{
+              firstTabNavKey.currentState.popUntil((r) => r.isFirst);
+              secondTabNavKey.currentState.popUntil((r) => r.isFirst);
+              thirdTabNavKey.currentState.popUntil((r) => r.isFirst);
+            }
+
+            currentIndex = index;
+          },
+        ),
       ),
     );
 
