@@ -134,8 +134,13 @@ class _customNavBarOneState extends State<customNavBarOne> {
             _myPage.jumpToPage(_myPage.initialPage);
           }
           else{
-            exit(0);
+            if(navigatorKey.currentState.canPop()){
+              navigatorKey.currentState.maybePop();
+            }else{
+              exit(0);
+            }
           }
+          return false;
         },
 
         child: CustomNavigator(
